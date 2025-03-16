@@ -9,7 +9,6 @@ profile_section = st.container()
 with profile_section:
     about_me = """
     Hi! I’m Gerald Ayeras from the Philippines, an aspiring Python developer with a strong passion for data analysis and web development.
-    Hi! I’m Gerald Ayeras from the Philippines, an aspiring Python developer with a strong passion for data analysis and web development.
     I’m currently on an exciting journey of learning and building projects to sharpen my skills in Python and other technologies that bring ideas to life.
 
     My goal is to develop efficient, scalable, and impactful solutions—whether that means automating processes with Python, 
