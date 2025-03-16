@@ -1,14 +1,14 @@
 import streamlit as st
 import pandas as pd
-import json
 
 
 st.set_page_config(layout="wide")
 profile_section = st.container()
+project_section = st.container()
 
 with profile_section:
     about_me = """
-    Hi! I’m Gerald Ayeras from the Philippines, an aspiring Python developer with a strong passion for data analysis and web development.
+    Hi! I’m Gerald from the Philippines, an aspiring Python developer with a strong passion for data analysis and web development.
     I’m currently on an exciting journey of learning and building projects to sharpen my skills in Python and other technologies that bring ideas to life.
 
     My goal is to develop efficient, scalable, and impactful solutions—whether that means automating processes with Python, 
@@ -21,8 +21,15 @@ with profile_section:
     col1,col2 = st.columns([1.5,5])
     with col1:
         st.image("images/photo.jpg", use_container_width=True)
+        with st.expander("Socials"):
+            st.link_button("Facebook", "https://www.facebook.com/ayeras.gerald26", use_container_width=True,
+                           icon=":material/thumb_up:")
+            st.link_button("Github", "https://github.com/misterabs26", use_container_width=True,
+                           icon=":material/rocket_launch:")
+            st.link_button("LinkedIn", "https://www.linkedin.com/in/ghyxen/", use_container_width=True,
+                           icon=":material/person_check:")
     with col2:
-        st.subheader("Bio")
+        st.subheader("Gerald Ayeras")
         st.info(about_me)
 
 with st.container():
@@ -32,7 +39,7 @@ with st.container():
 
 df = pd.read_csv("data.csv", sep=";")
 
-with st.container():
+with project_section:
     st.header("Projects")
     cols = st.columns(3,gap="large")
     for i, row in df.iterrows():
