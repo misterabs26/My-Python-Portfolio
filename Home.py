@@ -4,6 +4,10 @@ import pandas as pd
 
 st.set_page_config(layout="wide")
 profile_section = st.container()
+with st.container():
+    content = """ This portfolio is a reflection of my learning process, showcasing the projects I’ve worked on and the skills I’ve gained along the way. 
+    I’m always open to collaboration, feedback, and new opportunities, so feel free to reach out!"""
+    st.write(content)
 project_section = st.container()
 
 with profile_section:
@@ -32,21 +36,19 @@ with profile_section:
         st.subheader("Gerald Ayeras")
         st.info(about_me)
 
-with st.container():
-    content = """ This portfolio is a reflection of my learning process, showcasing the projects I’ve worked on and the skills I’ve gained along the way. 
-    I’m always open to collaboration, feedback, and new opportunities, so feel free to reach out!"""
-    st.write(content)
 
 df = pd.read_csv("data.csv", sep=";")
 
 with project_section:
     st.header("Projects")
-    cols = st.columns(3,gap="large")
+    cols = st.columns(2,gap="large")
     for i, row in df.iterrows():
-        col = cols[i % 3]
+        col = cols[i % 2]
         with col:
-            st.subheader(row["title"])
+            st.subheader(row["title"],divider="rainbow")
             st.image(f"images/{row["image"]}",use_container_width=True)
-            st.write(row["description"])
+            st.markdown(f"""
+                <p class="project-desc">{row["description"]}</p>
+            """, unsafe_allow_html=True)
             with st.expander("Source Code"):
                 st.info(row['url'])
