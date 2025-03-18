@@ -22,7 +22,7 @@ with profile_section:
     I’m particularly interested in data visualization, backend development, and front-end technologies that help create seamless user experiences.
     """
     st.header("About Me")
-    col1,col2 = st.columns([1.5,5])
+    col1,col2 = st.columns([1.6,5])
     with col1:
         st.image("images/photo.jpg", use_container_width=True)
         with st.expander("Socials"):
@@ -47,8 +47,6 @@ with project_section:
         with col:
             st.subheader(row["title"],divider="rainbow")
             st.image(f"images/{row["image"]}",use_container_width=True)
-            st.markdown(f"""
-                <p class="project-desc">{row["description"]}</p>
-            """, unsafe_allow_html=True)
+            st.write(row["description"])
             with st.expander("Source Code"):
                 st.info(row['url'])
