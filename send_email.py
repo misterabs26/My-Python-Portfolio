@@ -1,23 +1,34 @@
 import smtplib, ssl
 import os
+from email.mime.text import MIMEText
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
 
-user_email = os.getenv("EMAIL_USER")
-password = os.getenv("EMAIL_PASS")
 
-host ="smtp.gmail.com"
-port = 465
+def send_email(sender_email,sender_message):
+    admin_email = os.getenv("EMAIL_USER")
+    password = os.getenv("EMAIL_PASS")
 
-receiver = "mister.abs26@gmail.com"
-context = ssl.create_default_context()
+    host = "smtp.gmail.com"
+    port = 465
 
-message = """\
-Subject: Test
-Hi, This is only a test
-"""
-with smtplib.SMTP_SSL(host, port, context=context) as server:
-    server.login(user_email, password)
-    server.sendmail(user_email,receiver, message)
+    # Create email with MIMEText
+    subject = f"New Message from your portfolio"
+    body = f"""
+    {sender_email} sent you a message:
+    
+    {sender_message}
+    """
+    msg = MIMEText(body)
+    msg["From"] = admin_email
+    msg["To"] = admin_email
+    msg["Subject"] = subject
+    msg["Reply-To"] = sender_email
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(host, port, context=context) as server:
+        server.login(admin_email, password)
+        server.sendmail(admin_email, admin_email, msg.as_string())
+
