@@ -7,10 +7,10 @@ with st.form(key="email_forms"):
     user_email = st.text_input("Your email address: ")
     user_message = st.text_area("Your message here:")
 
-    submit_btn = st.form_submit_button("Submit",on_click=send_email(user_email,user_message))
+    submit_btn = st.form_submit_button("Submit")
     if submit_btn:
         if user_email and user_message:
-            st.info("Your email was sent successfully")
+            send_email(user_email, user_message)
         else:
             st.warning("Please fill up the form.")
 
