@@ -1,23 +1,27 @@
 import smtplib, ssl
 import os
 from email.mime.text import MIMEText
-from dotenv import load_dotenv
-import re
 import streamlit as st
-
+# from dotenv import load_dotenv
+import re
 
 # Load environment variables from .env file
-load_dotenv()
+# load_dotenv()
 
 def validate_email(email):
     return re.match(r"[^@]+@[^@]+\.[^@]+", email)
 
 def send_email(sender_email,sender_message):
-    admin_email = os.getenv("EMAIL_USER")
-    password = os.getenv("EMAIL_PASS")
+    # Use this code if you're using .dotenv instead of streamlit secrets
+    # admin_email = os.getenv("EMAIL_USER")
+    # password = os.getenv("EMAIL_PASS")
+
+    admin_email = st.secrets["email"]["EMAIL_USER"]
+    password = st.secrets["email"]["EMAIL_PASS"]
 
     host = "smtp.gmail.com"
     port = 465
+
     if validate_email(sender_email):
         # Create email with MIMEText
         subject = f"New Message from your portfolio"
@@ -37,6 +41,6 @@ def send_email(sender_email,sender_message):
             server.login(admin_email, password)
             server.sendmail(admin_email, admin_email, msg.as_string())
 
-        st.info("Your email was sent successfully")
+            st.success("Email was sent successfully")
     else:
-        st.warning("Invalid email")
+        st.error("Please input a valid email")
