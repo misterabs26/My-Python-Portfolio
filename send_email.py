@@ -26,7 +26,7 @@ def send_email(sender_email,sender_message):
         # Create email with MIMEText
         subject = f"New Message from your portfolio"
         body = f"""
-    g    {sender_email} sent you a message:
+        {sender_email} sent you a message:
         
         {sender_message}
         """
